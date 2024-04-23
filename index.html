@@ -60,9 +60,9 @@
     <script>
       const trafficLightColors = ['red', 'yellow', 'green'];
       const trafficLightDelays = {
-        red: 6000,
-        yellow: 3000,
-        green: 6000,
+        red: 5000,
+        yellow: 2000,
+        green: 5000,
       };
 
       let buttonId = 0;
@@ -76,12 +76,13 @@
         button = document.getElementById(trafficLightColors[buttonId]);
 
         document.querySelectorAll('.traffic-light').forEach((button) => {
-          button.classList.remove('red, yellow', 'green');
+          button.classList.remove('red', 'yellow', 'green');
         });
 
         button.classList.add(trafficLightColors[buttonId]);
 
         const delay = trafficLightDelays[trafficLightColors[buttonId]];
+
         buttonId++;
 
         setTimeout(updateTrafficLight, delay);
