@@ -52,43 +52,42 @@
   <body>
     <div class="wrap">
       <main>
-        <button
-          class="traffic-light red"
-          id="red"
-          onclick="handleChangeColor(event)"
-        ></button>
-        <button
-          class="traffic-light"
-          id="yellow"
-          onclick="handleChangeColor(event)"
-        ></button>
-        <button
-          class="traffic-light"
-          id="green"
-          onclick="handleChangeColor(event)"
-        ></button>
+        <button class="traffic-light red" id="red"></button>
+        <button class="traffic-light" id="yellow"></button>
+        <button class="traffic-light" id="green"></button>
       </main>
     </div>
     <script>
-      const trafficLightColors = {
-        red: 'red',
-        yellow: 'yellow',
-        green: 'green',
+      const trafficLightColors = ['red', 'yellow', 'green'];
+      const trafficLightDelays = {
+        red: 6000,
+        yellow: 3000,
+        green: 6000,
       };
 
-      function handleChangeColor(event) {
-        const buttonId = event.target.id;
-        const button = document.getElementById(buttonId);
-        const backgroundColorToAdd = trafficLightColors[buttonId];
+      let buttonId = 0;
+      let button = null;
 
-        // Remove the 'active' class from all buttons
+      function updateTrafficLight() {
+        if (buttonId >= trafficLightColors.length) {
+          buttonId = 0;
+        }
+
+        button = document.getElementById(trafficLightColors[buttonId]);
+
         document.querySelectorAll('.traffic-light').forEach((button) => {
-          button.classList.remove('red', 'green', 'yellow');
+          button.classList.remove('red, yellow', 'green');
         });
 
-        // Add the appropriate color class to the clicked button
-        button.classList.add(backgroundColorToAdd);
+        button.classList.add(trafficLightColors[buttonId]);
+
+        const delay = trafficLightDelays[trafficLightColors[buttonId]];
+        buttonId++;
+
+        setTimeout(updateTrafficLight, delay);
       }
+
+      updateTrafficLight();
     </script>
   </body>
 </html>
